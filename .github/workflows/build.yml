@@ -9,21 +9,14 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: '11'
+          java-version: '17'
           distribution: 'temurin'
           
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
         
-      - name: Make gradlew executable
-        run: |
-          mkdir -p gradle/wrapper
-          echo "distributionUrl=https\://services.gradle.org/distributions/gradle-7.5-bin.zip" > gradle/wrapper/gradle-wrapper.properties
-          gradle wrapper
-          chmod +x gradlew
-          
       - name: Build with Gradle
-        run: ./gradlew assembleDebug
+        run: gradle assembleDebug
         
       - name: Upload APK
         uses: actions/upload-artifact@v4
